@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                   xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+                   xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+                   id="definitions_orderProcess"
+                   targetNamespace="http://waffor.com/bpmn">
+
+  <bpmn:process id="orderProcess" name="Order Process" isExecutable="true">
+
+    <bpmn:startEvent id="startEvent" name="Order Created" />
+
+    <bpmn:sequenceFlow id="flow1" sourceRef="startEvent" targetRef="paymentTask" />
+
+    <bpmn:serviceTask id="paymentTask" name="Process Payment" camunda:type="external" camunda:topic="payment-processing">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="orderId">${orderId}</camunda:inputParameter>
+          <camunda:inputParameter name="amount">${amount}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:sequenceFlow id="flow2" sourceRef="paymentTask" targetRef="paymentGateway" />
+
+    <bpmn:exclusiveGateway id="paymentGateway" name="Payment OK?" />
+
+    <bpmn:sequenceFlow id="flowPaymentSuccess" name="success" sourceRef="paymentGateway" targetRef="kitchenTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">${paymentStatus == "SUCCESS"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:sequenceFlow id="flowPaymentFailed" name="failed" sourceRef="paymentGateway" targetRef="cancelledEnd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">${paymentStatus == "FAILED"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:serviceTask id="kitchenTask" name="Prepare Food" camunda:type="external" camunda:topic="kitchen-preparation">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="orderId">${orderId}</camunda:inputParameter>
+          <camunda:inputParameter name="items">${items}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:sequenceFlow id="flow3" sourceRef="kitchenTask" targetRef="deliveryTask" />
+
+    <bpmn:serviceTask id="deliveryTask" name="Assign Delivery" camunda:type="external" camunda:topic="delivery-assignment">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="orderId">${orderId}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:sequenceFlow id="flow4" sourceRef="deliveryTask" targetRef="deliveredEnd" />
+
+    <bpmn:endEvent id="deliveredEnd" name="Delivered" />
+    <bpmn:endEvent id="cancelledEnd" name="Cancelled" />
+
+  </bpmn:process>
+</bpmn:definitions>

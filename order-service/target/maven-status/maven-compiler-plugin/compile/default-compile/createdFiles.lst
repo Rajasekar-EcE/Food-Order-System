@@ -1,0 +1,12 @@
+com\waffor\orderservice\messaging\OrderConsumer.class
+com\waffor\orderservice\model\StatusUpdateRequest.class
+com\waffor\orderservice\repository\OrderRepository.class
+com\waffor\orderservice\model\OrderRequest.class
+com\waffor\orderservice\OrderServiceApplication.class
+com\waffor\orderservice\messaging\OrderCreatedMessage.class
+com\waffor\orderservice\model\OrderStatus.class
+com\waffor\orderservice\messaging\OrderProducer.class
+com\waffor\orderservice\config\JmsConfig.class
+com\waffor\orderservice\service\OrderService.class
+com\waffor\orderservice\controller\OrderController.class
+com\waffor\orderservice\model\Order.class

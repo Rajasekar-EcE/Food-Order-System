@@ -1,0 +1,8 @@
+com\waffor\kitchenservice\model\KitchenTicketRequest.class
+com\waffor\kitchenservice\controller\KitchenController.class
+com\waffor\kitchenservice\worker\KitchenExternalTaskHandler.class
+com\waffor\kitchenservice\repository\KitchenTicketRepository.class
+com\waffor\kitchenservice\KitchenServiceApplication.class
+com\waffor\kitchenservice\service\KitchenPreparationService.class
+com\waffor\kitchenservice\controller\KitchenController$StatusOnly.class
+com\waffor\kitchenservice\model\KitchenTicket.class
