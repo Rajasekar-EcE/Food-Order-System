@@ -1,0 +1,7 @@
+com\waffor\deliveryservice\DeliveryServiceApplication.class
+com\waffor\deliveryservice\service\DeliveryAssignmentService.class
+com\waffor\deliveryservice\model\DeliveryRequest.class
+com\waffor\deliveryservice\repository\DeliveryRepository.class
+com\waffor\deliveryservice\worker\DeliveryExternalTaskHandler.class
+com\waffor\deliveryservice\controller\DeliveryController.class
+com\waffor\deliveryservice\model\Delivery.class
