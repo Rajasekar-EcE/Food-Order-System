@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/food_order_system?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+camunda.client.base-url: http://localhost:8081/engine-rest
+camunda.client.topic: payment-processing
+camunda.client.lock-duration: 10000
+
+order-service.base-url: http://localhost:8081
+
+logging:
+  level:
+    com.waffor: INFO

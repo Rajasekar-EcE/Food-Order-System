@@ -1,0 +1,7 @@
+com\waffor\paymentservice\repository\PaymentRepository.class
+com\waffor\paymentservice\service\PaymentProcessingService.class
+com\waffor\paymentservice\model\Payment.class
+com\waffor\paymentservice\model\PaymentRequest.class
+com\waffor\paymentservice\worker\PaymentExternalTaskHandler.class
+com\waffor\paymentservice\controller\PaymentController.class
+com\waffor\paymentservice\PaymentServiceApplication.class
